@@ -1,3 +1,9 @@
+### Sep 4, 2017 - v1.0.4
+
+* Added threshold configuration from https://github.com/mailcheck/mailcheck-ruby/pull/5/commits/e1865a2df067fd527781d64ab3611fe189bd35c5
+* Code linted
+* Removed q.com from domains
+
 ### Sep 4, 2017 - v1.0.3
 
 * New domains added
