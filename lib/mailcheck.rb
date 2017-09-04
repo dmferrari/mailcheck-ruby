@@ -4,9 +4,79 @@ class Mailcheck
 
   THRESHOLD = 3
 
-  DOMAINS = ['yahoo.com', 'google.com', 'hotmail.com', 'gmail.com', 'me.com', 'aol.com', 'mac.com', 'live.com', 'comcast.net', 'googlemail.com', 'msn.com', 'hotmail.co.uk', 'yahoo.co.uk', 'facebook.com', 'verizon.net', 'sbcglobal.net', 'att.net', 'gmx.com', 'mail.com', 'ymail.com']
+  DOMAINS = [
+    'aim.net',
+    'aol.com',
+    'att.net',
+    'bellsouth.net',
+    'cableone.net',
+    'centurylink.net',
+    'centurytel.net',
+    'cfl.rr.com',
+    'charter.net',
+    'comcast.net',
+    'cox.net',
+    'earthlink.com',
+    'email.com',
+    'embarqmail.com',
+    'facebook.com',
+    'frontier.com',
+    'frontiernet.net',
+    'gmail.com',
+    'gmx.com',
+    'google.com',
+    'googlemail.com',
+    'hot.rr.com',
+    'hotmail.co.uk',
+    'hotmail.com',
+    'hughes.net',
+    'icloud.com',
+    'inbox.com',
+    'insightbb.com',
+    'juno.com',
+    'live.com',
+    'mac.com',
+    'mail.com',
+    'mail.regent.edu',
+    'mail.rmu.edu',
+    'mail.uc.edu',
+    'mail.usf.edu',
+    'mail.wvu.edu',
+    'mchsi.com',
+    'me.com',
+    'msn.com',
+    'netscape.com',
+    'netzero.com',
+    'optonline.com',
+    'outlook.com',
+    'peoplepc.com',
+    'pobox.com',
+    'q.com',
+    'roadrunner.com',
+    'rocketmail.com',
+    'sbcglobal.net',
+    'suddenlink.net',
+    'tampabay.rr.com',
+    'tds.net',
+    'twc.com',
+    'verizon.net',
+    'windstream.net',
+    'yahoo.co.uk',
+    'yahoo.com',
+    'ymail.com',
+    'zoho.com'
+  ].freeze
 
-  TOP_LEVEL_DOMAINS = ['co.uk', 'com', 'net', 'org', 'info', 'edu', 'gov', 'mil']
+  TOP_LEVEL_DOMAINS = [
+    'co.uk',
+    'com',
+    'edu',
+    'gov',
+    'info',
+    'mil',
+    'net',
+    'org'
+  ].freeze
 
   def initialize(opts = {})
     @domains = opts[:domains] || DOMAINS

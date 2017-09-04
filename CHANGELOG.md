@@ -1,3 +1,7 @@
+### Sep 4, 2017 - v1.0.1
+
+* Added more US domains
+
 ### Oct 18, 2013 - v1.0.0
 
 * Fixes by Alexander Shapiotko
@@ -9,7 +13,7 @@
 
 ### Feb 19, 2013 - v0.0.3
 
-* Actually fix homepage 
+* Actually fix homepage
 
 ### Feb 19, 2013 - v0.0.2
 
