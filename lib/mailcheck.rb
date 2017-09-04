@@ -5,7 +5,7 @@ class Mailcheck
   THRESHOLD = 3
 
   DOMAINS = [
-    'aim.net',
+    'aim.com',
     'aol.com',
     'att.net',
     'bellsouth.net',
