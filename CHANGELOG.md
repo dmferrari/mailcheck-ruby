@@ -1,3 +1,7 @@
+### Sep 4, 2017 - v1.0.3
+
+* New domains added
+
 ### Sep 4, 2017 - v1.0.2
 
 * Fixed AIM domain
