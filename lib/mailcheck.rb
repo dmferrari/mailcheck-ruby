@@ -86,11 +86,9 @@ class Mailcheck
 
   def suggest(email)
     email_parts = split_email(email.downcase)
-
     return false unless email_parts
-
+    email_parts[:domain] = replace_known_misspelled_domains(email_parts[:domain])
     closest_domain = find_closest_domain(email_parts[:domain], @domains)
-
     if closest_domain
       if closest_domain != email_parts[:domain]
         # The email address closely matches one of the supplied domains return a suggestion
@@ -111,6 +109,8 @@ class Mailcheck
     # or is an invalid email address do not return a suggestion.
     false
   end
+
+  private
 
   def find_closest_domain(domain, domains)
     min_dist = 99
@@ -165,13 +165,22 @@ class Mailcheck
     }
   end
 
-  private
-
   def closest_domain_for(email_parts, domain, closest_top_level_domain)
     if email_parts[:top_level_domain].empty?
       "#{domain}.#{closest_top_level_domain}"
     else
       domain.sub(/#{email_parts[:top_level_domain]}$/, closest_top_level_domain)
+    end
+  end
+
+  def replace_known_misspelled_domains(domain)
+    case domain
+    when 'gmail.net'
+      'gmail.com'
+    when 'att.com'
+      'att.net'
+    else
+      domain
     end
   end
 end
