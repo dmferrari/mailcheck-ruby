@@ -51,7 +51,6 @@ class Mailcheck
     'outlook.com',
     'peoplepc.com',
     'pobox.com',
-    'q.com',
     'roadrunner.com',
     'rocketmail.com',
     'sbcglobal.net',
@@ -82,6 +81,7 @@ class Mailcheck
   def initialize(opts = {})
     @domains = opts[:domains] || DOMAINS
     @top_level_domains = opts[:top_level_domains] || TOP_LEVEL_DOMAINS
+    @threshold = opts[:threshold] || THRESHOLD
   end
 
   def suggest(email)
@@ -124,7 +124,7 @@ class Mailcheck
         closest_domain = dmn
       end
     end
-    closest_domain if min_dist <= THRESHOLD && closest_domain
+    closest_domain if min_dist <= @threshold && closest_domain
   end
 
   def sift_3distance(s1, s2)
