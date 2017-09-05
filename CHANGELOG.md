@@ -1,3 +1,7 @@
+### Sep 5, 2017 - v1.0.5
+
+* Fix a bug in the domains replacement
+
 ### Sep 4, 2017 - v1.0.5
 
 * Replace known misspelled domains
