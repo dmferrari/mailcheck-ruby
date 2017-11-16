@@ -1,3 +1,7 @@
+### Nov 16, 2017 - v1.0.7
+
+* Added kc.com to the valid domains
+
 ### Sep 5, 2017 - v1.0.5
 
 * Fix a bug in the domains replacement

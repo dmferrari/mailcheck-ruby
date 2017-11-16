@@ -33,6 +33,7 @@ class Mailcheck
     'inbox.com',
     'insightbb.com',
     'juno.com',
+    'kc.com',
     'live.com',
     'mac.com',
     'mail.com',
