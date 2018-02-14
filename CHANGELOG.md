@@ -1,3 +1,7 @@
+### Nov 16, 2017 - v1.0.8
+
+* Added dza.com to the valid domains
+
 ### Nov 16, 2017 - v1.0.7
 
 * Added kc.com to the valid domains

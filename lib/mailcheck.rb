@@ -15,6 +15,7 @@ class Mailcheck
     'charter.net',
     'comcast.net',
     'cox.net',
+    'dza.com',
     'earthlink.com',
     'email.com',
     'embarqmail.com',
