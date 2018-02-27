@@ -1,4 +1,4 @@
-### Nov 16, 2017 - v1.0.8
+### Feb 14, 2018 - v1.0.8
 
 * Added dza.com to the valid domains
 
