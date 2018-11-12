@@ -1,3 +1,12 @@
+### Nov 12, 2019 - v1.0.9
+
+* Use same domains and TLDs for gem and tests
+* Updated RSpec version
+* Updated RSpec configuration syntax
+* Added logging whenever a change is made
+* Added several top level domains
+* Added lamar.com to the valid domains
+
 ### Feb 14, 2018 - v1.0.8
 
 * Added dza.com to the valid domains

@@ -1,84 +1,10 @@
+require 'logger'
 require 'mailcheck/version'
+require 'mailcheck/domains'
+require 'mailcheck/tlds'
 
 class Mailcheck
   THRESHOLD = 3
-
-  DOMAINS = [
-    'aim.com',
-    'aol.com',
-    'att.net',
-    'bellsouth.net',
-    'cableone.net',
-    'centurylink.net',
-    'centurytel.net',
-    'cfl.rr.com',
-    'charter.net',
-    'comcast.net',
-    'cox.net',
-    'dza.com',
-    'earthlink.com',
-    'email.com',
-    'embarqmail.com',
-    'facebook.com',
-    'frontier.com',
-    'frontiernet.net',
-    'gmail.com',
-    'gmx.com',
-    'google.com',
-    'googlemail.com',
-    'hot.rr.com',
-    'hotmail.co.uk',
-    'hotmail.com',
-    'hughes.net',
-    'icloud.com',
-    'inbox.com',
-    'insightbb.com',
-    'juno.com',
-    'kc.com',
-    'live.com',
-    'mac.com',
-    'mail.com',
-    'mail.regent.edu',
-    'mail.rmu.edu',
-    'mail.uc.edu',
-    'mail.usf.edu',
-    'mail.wvu.edu',
-    'mchsi.com',
-    'me.com',
-    'meteoraffinity.com',
-    'msn.com',
-    'netscape.com',
-    'netzero.com',
-    'optonline.com',
-    'outlook.com',
-    'peoplepc.com',
-    'pobox.com',
-    'roadrunner.com',
-    'rocketmail.com',
-    'sbcglobal.net',
-    'suddenlink.net',
-    'tampabay.rr.com',
-    'tds.net',
-    'twc.com',
-    'verizon.net',
-    'windstream.net',
-    'xagax.com',
-    'yahoo.co.uk',
-    'yahoo.com',
-    'ymail.com',
-    'zoho.com'
-  ].freeze
-
-  TOP_LEVEL_DOMAINS = [
-    'co.uk',
-    'com',
-    'edu',
-    'gov',
-    'info',
-    'mil',
-    'net',
-    'org'
-  ].freeze
 
   def initialize(opts = {})
     @domains = opts[:domains] || DOMAINS
@@ -89,12 +15,15 @@ class Mailcheck
   def suggest(email)
     email_parts = split_email(email.downcase)
     return false unless email_parts
+
     email_parts[:top_level_domain] = replace_known_misspelled_domains(email_parts[:top_level_domain])
     closest_domain = find_closest_domain(email_parts[:domain], @domains)
     if closest_domain
       if closest_domain != email_parts[:domain]
         # The email address closely matches one of the supplied domains return a suggestion
-        return { address: email_parts[:address], domain: closest_domain, full: "#{email_parts[:address]}@#{closest_domain}" }
+        suggested_email = "#{email_parts[:address]}@#{closest_domain}"
+        Mailcheck.logger.info "Email address suggested - Original: #{email} - Suggested: #{suggested_email}"
+        return { address: email_parts[:address], domain: closest_domain, full: suggested_email }
       end
     else
       # The email address does not closely match one of the supplied domains
@@ -103,7 +32,9 @@ class Mailcheck
         # The email address may have a mispelled top-level domain return a suggestion
         domain = email_parts[:domain]
         closest_domain = closest_domain_for(email_parts, domain, closest_top_level_domain)
-        return { address: email_parts[:address], domain: closest_domain, full: "#{email_parts[:address]}@#{closest_domain}" }
+        suggested_email = "#{email_parts[:address]}@#{closest_domain}"
+        Mailcheck.logger.info "Email address suggested - Original: #{email} - Suggested: #{suggested_email}"
+        return { address: email_parts[:address], domain: closest_domain, full: suggested_email }
       end
     end
     # The email address exactly matches one of the supplied domains, does not closely
@@ -118,8 +49,10 @@ class Mailcheck
     min_dist = 99
     closest_domain = nil
     return nil if domains.nil? || domains.empty?
+
     domains.each do |dmn|
       return domain if domain == dmn
+
       dist = sift_3distance(domain, dmn)
       if dist < min_dist
         min_dist = dist
@@ -157,9 +90,11 @@ class Mailcheck
   def split_email(email)
     parts = email.split('@')
     return false if parts.length < 2 || parts.any? { |p| p == '' }
+
     domain = parts.pop
     domain_parts = domain.split('.')
     return false if domain_parts.empty?
+
     {
       top_level_domain: domain_parts[1..-1].join('.'),
       domain: domain,
@@ -183,6 +118,15 @@ class Mailcheck
       'att.net'
     else
       domain
+    end
+  end
+
+  class << self
+    attr_writer :logger
+    def logger
+      @logger ||= Logger.new($stdout).tap do |log|
+        log.progname = name
+      end
     end
   end
 end
