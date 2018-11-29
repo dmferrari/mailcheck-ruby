@@ -4,7 +4,7 @@ require 'mailcheck/domains'
 require 'mailcheck/tlds'
 
 class Mailcheck
-  THRESHOLD = 3
+  THRESHOLD = 2
 
   def initialize(opts = {})
     @domains = opts[:domains] || DOMAINS

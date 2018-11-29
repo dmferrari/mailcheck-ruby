@@ -1,4 +1,8 @@
-### Nov 12, 2019 - v1.0.9
+### Nov 29, 2018 - v1.0.10
+
+* Set the threshold to 1 to avoid false positives
+
+### Nov 12, 2018 - v1.0.9
 
 * Use same domains and TLDs for gem and tests
 * Updated RSpec version
