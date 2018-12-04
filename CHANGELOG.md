@@ -1,3 +1,7 @@
+### Dec 4, 2019 - v1.0.11
+
+* Do not write log on test environments
+
 ### Nov 29, 2018 - v1.0.10
 
 * Set the threshold to 1 to avoid false positives

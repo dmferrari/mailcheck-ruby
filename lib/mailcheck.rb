@@ -22,7 +22,7 @@ class Mailcheck
       if closest_domain != email_parts[:domain]
         # The email address closely matches one of the supplied domains return a suggestion
         suggested_email = "#{email_parts[:address]}@#{closest_domain}"
-        Mailcheck.logger.info "Email address suggested - Original: #{email} - Suggested: #{suggested_email}"
+        Mailcheck.logger.info "Email address suggested - Original: #{email} - Suggested: #{suggested_email}" unless Rails.env.test?
         return { address: email_parts[:address], domain: closest_domain, full: suggested_email }
       end
     else
@@ -33,7 +33,7 @@ class Mailcheck
         domain = email_parts[:domain]
         closest_domain = closest_domain_for(email_parts, domain, closest_top_level_domain)
         suggested_email = "#{email_parts[:address]}@#{closest_domain}"
-        Mailcheck.logger.info "Email address suggested - Original: #{email} - Suggested: #{suggested_email}"
+        Mailcheck.logger.info "Email address s uggested - Original: #{email} - Suggested: #{suggested_email}" unless Rails.env.test?
         return { address: email_parts[:address], domain: closest_domain, full: suggested_email }
       end
     end
